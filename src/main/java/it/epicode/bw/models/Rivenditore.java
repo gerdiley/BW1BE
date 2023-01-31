@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import it.epicode.bw.utils.JpaUtils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,9 +18,11 @@ import lombok.Setter;
 @Table (name = "rivenditori")
 @NoArgsConstructor
 public class Rivenditore extends PuntoVendita {public Rivenditore(int numeroBiglietti) {
-		super(numeroBiglietti);
+		//super(numeroBiglietti);
 		
 	}
+
+
 	
 	
 }
