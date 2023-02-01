@@ -2,16 +2,19 @@ package it.epicode.bw.app;
 
 import java.time.LocalDate;
 
+import it.epicode.bw.dao.DistributoreDAO;
 import it.epicode.bw.dao.ParcoMezziDAO;
 import it.epicode.bw.dao.PuntoVenditaDAO;
 import it.epicode.bw.dao.TesseraDAO;
 import it.epicode.bw.dao.UtenteDAO;
 import it.epicode.bw.models.Abbonamento;
 import it.epicode.bw.models.Biglietto;
+import it.epicode.bw.models.Distributore;
 import it.epicode.bw.models.DurataAbbonamento;
 import it.epicode.bw.models.MezzoTrasporto;
 import it.epicode.bw.models.PuntoVendita;
 import it.epicode.bw.models.Rivenditore;
+import it.epicode.bw.models.StatoDistributore;
 import it.epicode.bw.models.StatoMezzo;
 import it.epicode.bw.models.Tessera;
 import it.epicode.bw.models.TipoMezzo;
@@ -28,6 +31,12 @@ public class Main {
 		u1.setNome("Angelo");
 
 		UtenteDAO.save(u1);
+		
+		Utente u2 = new Utente();
+		u2.setCognome("Di Letizia");
+		u2.setNome("Gerardo");
+		
+		UtenteDAO.save(u2);
 
 		// ------CREO NUOVA TESSERA------
 		Tessera t1 = new Tessera();
@@ -36,6 +45,13 @@ public class Main {
 		t1.setUtente(u1);
 
 		TesseraDAO.save(t1);
+		
+		Tessera t2 = new Tessera();
+		t2.setCodTessera("101");
+		t2.setDataEmissione(LocalDate.parse("2022-01-02"));
+		t2.setUtente(u2);
+		
+		TesseraDAO.save(t2);
 
 		// ------CREO NUOVO PUNTO VENDITA------
 		PuntoVendita riv1 = new Rivenditore();
@@ -45,40 +61,52 @@ public class Main {
 		PuntoVendita riv2 = new Rivenditore();
 
 		PuntoVenditaDAO.save(riv2);
+		
+
+		Distributore dis3 = new Distributore();
+		dis3.setStato(StatoDistributore.ATTIVO);
+		
+		PuntoVenditaDAO.save(dis3);
+		
+		
+		
 
 		// ------EMETTO IL BIGLIETTO DAL PUNTO VENDITA------
 
-		Biglietto b6 = PuntoVenditaDAO.emettiBiglietto("37", riv2);
+		Biglietto b1 = PuntoVenditaDAO.emettiBiglietto("37", riv2);
 		
-		Biglietto b8 = PuntoVenditaDAO.emettiBiglietto("39", riv1);
+		Biglietto b2 = PuntoVenditaDAO.emettiBiglietto("39", riv1);
+		
+		Biglietto b3 = DistributoreDAO.emettiBiglietto("40", dis3);
 		
 		//PuntoVenditaDAO.emettiAbbonamento(null, riv2, null, t1)
-		PuntoVenditaDAO.emettiAbbonamento("43", riv1, DurataAbbonamento.MENSILE, t1);
+		Abbonamento a1 = PuntoVenditaDAO.emettiAbbonamento("43", riv1, DurataAbbonamento.MENSILE, t1);
 
 		//PuntoVenditaDAO.getBigliettiVenduti(52);
 		
 		//PuntoVenditaDAO.getBigliettiPeriodo(LocalDate.parse("2023-01-31"), LocalDate.parse("2023-01-31"));
 		
-//		PuntoVenditaDAO.isValid("100");
+		PuntoVenditaDAO.isValid("100");
 		
+		TesseraDAO.rinnova("101");
 		
 		
 		
 		// ISTANZA MEZZO
-        MezzoTrasporto m1 = new MezzoTrasporto(StatoMezzo.InSERVIZIO, null, null, LocalDate.now(), LocalDate.now().plusDays(1), 0, TipoMezzo.AUTOBUS, null);
-        ParcoMezziDAO.save(m1);
-//         ISTANZA BIGLIETTO
-        TitoloViaggio b1 = PuntoVenditaDAO.emettiBiglietto("20", riv1);
-        TitoloViaggio b2 = PuntoVenditaDAO.emettiBiglietto("22", riv1);
-//        STAMPA STATO DI VALIDITA
-        System.out.println(b1.isConvalida());
-        System.out.println(b2.isConvalida());
-//        VALIDAZIONE
-        ParcoMezziDAO.vidimazione(b1, m1);
-        ParcoMezziDAO.vidimazione(b2, m1);
-//        STAMPA STATO DI VALIDITA DOPO LA VALIDAZIONE
-        System.out.println(b1.isConvalida());
-        System.out.println(m1.getNumeroBiglietti()); 
+//        MezzoTrasporto m1 = new MezzoTrasporto(StatoMezzo.InSERVIZIO, null, null, LocalDate.now(), LocalDate.now().plusDays(1), 0, TipoMezzo.AUTOBUS, null);
+//        ParcoMezziDAO.save(m1);
+////         ISTANZA BIGLIETTO
+//        TitoloViaggio b1 = PuntoVenditaDAO.emettiBiglietto("20", riv1);
+//        TitoloViaggio b2 = PuntoVenditaDAO.emettiBiglietto("22", riv1);
+////        STAMPA STATO DI VALIDITA
+//        System.out.println(b1.isConvalida());
+//        System.out.println(b2.isConvalida());
+////        VALIDAZIONE
+//        ParcoMezziDAO.vidimazione(b1, m1);
+//        ParcoMezziDAO.vidimazione(b2, m1);
+////        STAMPA STATO DI VALIDITA DOPO LA VALIDAZIONE
+//        System.out.println(b1.isConvalida());
+//        System.out.println(m1.getNumeroBiglietti()); 
 	}
 
 }

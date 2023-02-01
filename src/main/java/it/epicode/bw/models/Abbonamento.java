@@ -18,7 +18,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-@NamedQuery(name = "getAbbonamentoByCod", query= "SELECT a.isValid FROM Abbonamento a WHERE a.tessera.codTessera = :c")
+@NamedQuery(name = "getDateByCod", query= "SELECT a.dataEmissione FROM Abbonamento a WHERE a.tessera.codTessera = :c")
+@NamedQuery(name = "getDurataByCod", query= "SELECT a.durataAbbonamento FROM Abbonamento a WHERE a.tessera.codTessera = :d")
+
 public class Abbonamento extends TitoloViaggio{
 	
 	

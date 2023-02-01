@@ -45,5 +45,5 @@ public abstract class TitoloViaggio {
 		this.codUnivoco = codUnivoco;
 		this.convalida = convalida;
 	}
-
+	
 }
