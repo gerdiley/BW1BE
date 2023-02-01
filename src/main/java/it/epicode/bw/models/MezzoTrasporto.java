@@ -17,8 +17,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 public class MezzoTrasporto {
 	@Id
@@ -51,10 +49,10 @@ public class MezzoTrasporto {
 
 	private int capienza;
 
+//	CONSTRUCTORS
 
 	public MezzoTrasporto(StatoMezzo statoMezzo, LocalDate inizioManutenzione, LocalDate fineManutenzione,
-			LocalDate inizioServizio, LocalDate fineServizio, int numeroBiglietti, TipoMezzo tipoMezzo, Tratta tratta,
-			int capienza) {
+			LocalDate inizioServizio, LocalDate fineServizio, int numeroBiglietti, TipoMezzo tipoMezzo, Tratta tratta) {
 		
 		this.statoMezzo = statoMezzo;
 		this.inizioManutenzione = inizioManutenzione;
@@ -64,6 +62,87 @@ public class MezzoTrasporto {
 		this.numeroBiglietti = numeroBiglietti;
 		this.tipoMezzo = tipoMezzo;
 		this.tratta = tratta;
+		this.capienza = tipoMezzo.capienza;
+	}
+
+//	GETTERS AND SETTERS
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public StatoMezzo getStatoMezzo() {
+		return statoMezzo;
+	}
+
+	public void setStatoMezzo(StatoMezzo statoMezzo) {
+		this.statoMezzo = statoMezzo;
+	}
+
+	public LocalDate getInizioManutenzione() {
+		return inizioManutenzione;
+	}
+
+	public void setInizioManutenzione(LocalDate inizioManutenzione) {
+		this.inizioManutenzione = inizioManutenzione;
+	}
+
+	public LocalDate getFineManutenzione() {
+		return fineManutenzione;
+	}
+
+	public void setFineManutenzione(LocalDate fineManutenzione) {
+		this.fineManutenzione = fineManutenzione;
+	}
+
+	public LocalDate getInizioServizio() {
+		return inizioServizio;
+	}
+
+	public void setInizioServizio(LocalDate inizioServizio) {
+		this.inizioServizio = inizioServizio;
+	}
+
+	public LocalDate getFineServizio() {
+		return fineServizio;
+	}
+
+	public void setFineServizio(LocalDate fineServizio) {
+		this.fineServizio = fineServizio;
+	}
+
+	public int getNumeroBiglietti() {
+		return numeroBiglietti;
+	}
+
+	public void setNumeroBiglietti(int numeroBiglietti) {
+		this.numeroBiglietti = numeroBiglietti;
+	}
+
+	public TipoMezzo getTipoMezzo() {
+		return tipoMezzo;
+	}
+
+	public void setTipoMezzo(TipoMezzo tipoMezzo) {
+		this.tipoMezzo = tipoMezzo;
+	}
+
+	public Tratta getTratta() {
+		return tratta;
+	}
+
+	public void setTratta(Tratta tratta) {
+		this.tratta = tratta;
+	}
+
+	public int getCapienza() {
+		return capienza;
+	}
+
+	public void setCapienza(int capienza) {
 		this.capienza = capienza;
 	}
 	

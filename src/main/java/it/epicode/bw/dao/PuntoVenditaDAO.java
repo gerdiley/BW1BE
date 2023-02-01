@@ -14,6 +14,7 @@ import it.epicode.bw.models.Tessera;
 import it.epicode.bw.models.TitoloViaggio;
 import it.epicode.bw.utils.JpaUtils;
 
+
 public class PuntoVenditaDAO {
 
 	public static void save(PuntoVendita p) {
@@ -61,6 +62,7 @@ public class PuntoVenditaDAO {
 			a.setCodUnivoco(codUnivoco);
 			a.setDataEmissione(LocalDate.now());
 			a.setDurataAbbonamento(durata);
+			// try catch per controllare se la tessera e` valida 
 			a.setTessera(t);
 			a.setPuntoVendita(p);
 
@@ -112,13 +114,24 @@ public class PuntoVenditaDAO {
 		}
 	}
 
-	public static void isValid(Abbonamento a) {// COME PARAMETRO DEVE RICEVERE IL NUMERO DI TESSERA NON L'ABBONAMENTO
-		if (LocalDate.now().isAfter(a.getDataEmissione().plusYears(1))) {
-			a.setValid(false);
-			System.out.println("L'abbonamento non è valido");
-		} else {
-			a.setValid(true);
-			System.out.println("L'abbonamento è valido");
+	public static void isValid(String codTessera) {// COME PARAMETRO DEVE RICEVERE IL NUMERO DI TESSERA NON L'ABBONAMENTO
+		try {
+			Query q = JpaUtils.em.createNamedQuery("getAbbonamentoByCod");
+			q.setParameter("c", codTessera);
+			
+			Object res = q.getResultList();
+			
+			System.out.println(res);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+		//		if (LocalDate.now().isAfter(a.getDataEmissione().plusYears(1))) {
+//			a.setValid(false);
+//			System.out.println("L'abbonamento non è valido");
+//		} else {
+//			a.setValid(true);
+//			System.out.println("L'abbonamento è valido");
+//		}
 	}
 }
