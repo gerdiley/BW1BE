@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.annotation.processing.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ public class MezzoTrasporto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+	@Enumerated(EnumType.STRING)
 	@Column (name = "stato_mezzo")
 	private StatoMezzo statoMezzo;
 	
@@ -41,6 +44,7 @@ public class MezzoTrasporto {
 	@Column (name = "numero_biglietti")
 	private int numeroBiglietti;
 	
+	@Enumerated(EnumType.STRING)
 	private TipoMezzo tipoMezzo;
 	
 	@ManyToOne
@@ -144,6 +148,13 @@ public class MezzoTrasporto {
 
 	public void setCapienza(int capienza) {
 		this.capienza = capienza;
+	}
+	
+	@Override
+	public String toString() {
+		return "MezzoTrasporto [id=" + id + ", statoMezzo=" + statoMezzo + ", inizioManutenzione=" + inizioManutenzione
+				+ ", fineManutenzione=" + fineManutenzione + ", inizioServizio=" + inizioServizio + ", fineServizio="
+				+ fineServizio + ", tipoMezzo=" + tipoMezzo + ", capienza=" + capienza + "]";
 	}
 	
 	

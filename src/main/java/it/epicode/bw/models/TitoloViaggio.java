@@ -39,6 +39,9 @@ public abstract class TitoloViaggio {
 
 	@ManyToOne
 	protected PuntoVendita puntoVendita;
+	
+	@ManyToOne
+	protected MezzoTrasporto mezzoVidimante;
 
 	public TitoloViaggio(String codUnivoco, boolean convalida) {
 
